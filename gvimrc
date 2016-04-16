@@ -143,4 +143,21 @@ imap <c-l> <Right>
 " 每行超过80个的字符用下划线标示
 au BufWinEnter * let w:m2=matchadd('Underlined', '\%>' . 80 . 'v.\+', -1)
 
+"******************************************************************************
+"" "                          << vundle >>
+"******************************************************************************
 
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=/usr/share/vim/vim74/bundle/vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+Plugin 'fatih/vim-go'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
