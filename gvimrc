@@ -147,6 +147,8 @@ au BufWinEnter * let w:m2=matchadd('Underlined', '\%>' . 80 . 'v.\+', -1)
 "" "                          << vundle >>
 "******************************************************************************
 
+" git clone https://github.com/gmarik/Vundle.vim.git /usr/share/vim/vim74/bundle/vundle.vim
+
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
