@@ -19,12 +19,33 @@ if filereadable("/etc/vim/gvimrc.local")
 endif
 
 "******************************************************************************
+"" "                          << vundle >>
+"******************************************************************************
+
+" git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+Plugin 'fatih/vim-go'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+"******************************************************************************
 ""                           < 界面配置 >
 "******************************************************************************
 
 set nocompatible " 关闭 vi 兼容模式
 syntax on " 自动语法高亮
-colorscheme Tomorrow-Night " 设定配色方案
+colorscheme molokai " 设定配色方案
 set number " 显示行号
 set cursorline " 突出显示当前行
 set ruler " 打开状态栏标尺
@@ -112,6 +133,20 @@ func SetTitle()
 		call append(line(".")+15, "#include <".expand("%").">")
 		call append(line(".")+16, "#endif")
 	endif
+	if &filetype='html'
+		call setline(1,"/*******************************************************************************")
+		call append(line("."), " File Name: ".expand("%"))
+		call append(line(".")+1, " Descript: ")
+		call append(line(".")+2, " ")
+		call append(line(".")+3, "Version: 1.0")
+		call append(line(".")+4, "Created Time: ".strftime("%D %T))
+		call append(line(".")+5, "Compiler: ")
+		call append(line(".")+6, "Editor: vim")
+		call append(line(".")+7, "Author: Jimbo")
+		call append(line(".")+8, "Mail: jimboo.lu@gmail.com")
+		call append(line(".")+9, "Company: ")
+		call append(line(".")+10, "*******************************************************************************/") 
+	endif
 		autocmd BufNewFile * normal G 
 endfunc
 
@@ -143,23 +178,12 @@ imap <c-l> <Right>
 " 每行超过80个的字符用下划线标示
 au BufWinEnter * let w:m2=matchadd('Underlined', '\%>' . 80 . 'v.\+', -1)
 
-"******************************************************************************
-"" "                          << vundle >>
-"******************************************************************************
+" 自动打开上一次关闭时的文件
+" Go to last file(s) if invoked without arguments.
+autocmd VimLeave * nested if (!isdirectory($HOME . "/.vim")) |
+    \ call mkdir($HOME . "/.vim") |
+    \ endif |
+    \ execute "mksession! " . $HOME . "/.vim/Session.vim"
 
-" git clone https://github.com/gmarik/Vundle.vim.git /usr/share/vim/vim74/bundle/vundle.vim
-
-set nocompatible              " be iMproved, required
-filetype off                  " required
-
-" set the runtime path to include Vundle and initialize
-set rtp+=/usr/share/vim/vim74/bundle/vundle.vim
-call vundle#begin()
-
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
-Plugin 'fatih/vim-go'
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
+autocmd VimEnter * nested if argc() == 0 && filereadable($HOME . "/.vim/Session.vim") |
+    \ execute "source " . $HOME . "/.vim/Session.vim"
