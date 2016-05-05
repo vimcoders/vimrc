@@ -44,6 +44,7 @@ filetype plugin indent on    " required
 "******************************************************************************
 
 set nocompatible " 关闭 vi 兼容模式
+set mouse=v
 syntax on " 自动语法高亮
 colorscheme molokai " 设定配色方案
 set number " 显示行号
@@ -90,7 +91,7 @@ inoremap { {<ENTER>}<ESC>ko
 "******************************************************************************
 "" "                          << 自动添加头文件注释 >>
 "******************************************************************************
-autocmd BufNewFile *.cpp,*.[ch],*.sh,*.java exec,*.cs ":call SetTitle()"
+autocmd BufNewFile *.cpp,*.[ch],*.sh,*.java exec ":call SetTitle()"
 
 func SetTitle()
 	if &filetype == 'cpp'
@@ -132,14 +133,13 @@ func SetTitle()
 		call append(line(".")+14, "#define ".expand("%"))
 		call append(line(".")+15, "#include <".expand("%").">")
 		call append(line(".")+16, "#endif")
-	endif
-	if &filetype='html'
+	else
 		call setline(1,"/*******************************************************************************")
 		call append(line("."), " File Name: ".expand("%"))
 		call append(line(".")+1, " Descript: ")
 		call append(line(".")+2, " ")
 		call append(line(".")+3, "Version: 1.0")
-		call append(line(".")+4, "Created Time: ".strftime("%D %T))
+		call append(line(".")+4, "Created Time: ".strftime("%D %T"))
 		call append(line(".")+5, "Compiler: ")
 		call append(line(".")+6, "Editor: vim")
 		call append(line(".")+7, "Author: Jimbo")
@@ -149,6 +149,23 @@ func SetTitle()
 	endif
 		autocmd BufNewFile * normal G 
 endfunc
+
+func SetBlockNote() 
+    call setline(1,"/*******************************************************************************") 
+    call append(line("."), "/// <summary>") 
+    call append(line(".")+1, "/// Add Description") 
+    call append(line(".")+2, "/// </summary>")
+    "新建文件后，自动定位到文件末尾
+    autocmd BufNewFile * normal G
+endfunc
+
+func SetLine()
+    call append(line("."),"/********************************************************************************")
+    call append(line(".")+1," ")
+    call append(line(".")+2,"*******************************************************************************/")
+    autocmd BufNewFile * normal G
+endfunc
+
 
 "*****************************************************************************
 ""                          <<  编写文件时的配置 >>
