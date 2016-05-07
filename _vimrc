@@ -28,6 +28,20 @@ function MyDiff()
   silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
 endfunction
 
+filetype off
+ 
+"Vundle的路径
+set rtp+=C:/gvim/vimfiles/bundle/Vundle.vim
+"插件的安装路径
+call vundle#begin('C:/gvim/vimfiles/bundle/')
+
+Plugin 'gmarik/Vundle.vim'
+Plugin 'L9'
+Plugin 'Valloric/YouCompleteMe'
+
+call vundle#end()
+filetype plugin indent on
+
 "******************************************************************************
 "    界面配置
 "******************************************************************************
@@ -87,7 +101,7 @@ inoremap { {<ENTER>}<ESC>ko
 "    自动添加头文件注释
 "******************************************************************************
 
-autocmd BufNewFile *.cpp,*.[ch],*.sh,*.java exec,*.cs ":call SetTitle()"
+autocmd BufNewFile *.cpp,*.[ch],*.sh,*.java exec ":call SetTitle()"
 
 func SetTitle()
   echom &filetype
@@ -208,6 +222,16 @@ imap <c-F10> <ESC>:call Link()<CR>
 
 " 每行超过80个的字符用下划线标示
 au BufWinEnter * let w:m2=matchadd('Underlined', '\%>' . 80 . 'v.\+', -1)
+
+" 自动打开上一次关闭时的文件
+" Go to last file(s) if invoked without arguments.
+autocmd VimLeave * nested if (!isdirectory($HOME . "/.vim")) |
+    \ call mkdir($HOME . "/.vim") |
+    \ endif |
+    \ execute "mksession! " . $HOME . "/.vim/Session.vim"
+
+autocmd VimEnter * nested if argc() == 0 && filereadable($HOME . "/.vim/Session.vim") |
+    \ execute "source " . $HOME . "/.vim/Session.vim"
 
 "*****************************************************************************
 "    编码配置
