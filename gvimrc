@@ -23,7 +23,6 @@ endif
 "******************************************************************************
 
 " git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-" https://github.com/VundleVim/Vundle.Vim
 
 set nocompatible              " be iMproved, required
 filetype off                  " required
