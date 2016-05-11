@@ -1,57 +1,54 @@
-set nocompatible
-source $VIMRUNTIME/vimrc_example.vim
-source $VIMRUNTIME/mswin.vim
-behave mswin
+" Make external commands work through a pipe instead of a pseudo-tty
+"set noguipty
 
-set diffexpr=MyDiff()
-function MyDiff()
-  let opt = '-a --binary '
-  if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
-  if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
-  let arg1 = v:fname_in
-  if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
-  let arg2 = v:fname_new
-  if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
-  let arg3 = v:fname_out
-  if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
-  let eq = ''
-  if $VIMRUNTIME =~ ' '
-    if &sh =~ '\<cmd'
-      let cmd = '""' . $VIMRUNTIME . '\diff"'
-      let eq = '"'
-    else
-      let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
-    endif
-  else
-    let cmd = $VIMRUNTIME . '\diff'
-  endif
-  silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
-endfunction
+" You can also specify a different font, overriding the default font
+"if has('gui_gtk2')
+"  set guifont=Bitstream\ Vera\ Sans\ Mono\ 12
+"else
+"  set guifont=-misc-fixed-medium-r-normal--14-130-75-75-c-70-iso8859-1
+"endif
 
-filetype off
- 
-"Vundle的路径
-set rtp+=C:/gvim/vimfiles/bundle/Vundle.vim
-"插件的安装路径
-call vundle#begin('C:/gvim/vimfiles/bundle/')
+" If you want to run gvim with a dark background, try using a different
+" colorscheme or running 'gvim -reverse'.
+" http://www.cs.cmu.edu/~maverick/VimColorSchemeTest/ has examples and
+" downloads for the colorschemes on vim.org
 
-Plugin 'gmarik/Vundle.vim'
-Plugin 'L9'
-Plugin 'Valloric/YouCompleteMe'
-
-call vundle#end()
-filetype plugin indent on
+" Source a global configuration file if available
+if filereadable("/etc/vim/gvimrc.local")
+  source /etc/vim/gvimrc.local
+endif
 
 "******************************************************************************
-"    界面配置
+"" "                          << vundle >>
+"******************************************************************************
+
+" git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+
+" set nocompatible              " be iMproved, required
+" filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+" set rtp+=~/.vim/bundle/Vundle.vim
+" call vundle#begin()
+
+" let Vundle manage Vundle, required
+" Plugin 'gmarik/Vundle.vim'
+" Plugin 'fatih/vim-go'
+
+" All of your Plugins must be added before the following line
+" call vundle#end()            " required
+" filetype plugin indent on    " required
+
+"******************************************************************************
+""                           < 界面配置 >
 "******************************************************************************
 
 set nocompatible " 关闭 vi 兼容模式
+set mouse=v
 syntax on " 自动语法高亮
-colorscheme molokai
-set guifont=Consolas:h12 
+colorscheme molokai " 设定配色方案
 set number " 显示行号
-" set cursorline " 突出显示当前行
+set cursorline " 突出显示当前行
 set ruler " 打开状态栏标尺
 set shiftwidth=4 " 设定 << 和 >> 命令移动时的宽度为 4
 set softtabstop=4 " 使得按退格键时可以一次删掉 4 个空格
@@ -83,35 +80,27 @@ set foldenable " 开始折叠
 set foldmethod=syntax " 设置语法折叠
 set foldcolumn=0 " 设置折叠区域的宽度
 setlocal foldlevel=1 " 设置折叠层数为
-" 窗口启动时自动最大化
-au GUIEnter * simalt ~x
-" UTF-8 编码
 set encoding=utf-8
 set termencoding=utf-8
 set formatoptions+=mM
-set fencs=utf-8,gbk
-" 括号自动补全
+set fencs=utf-8,gbk " UTF-8 编码
 inoremap ( ()<ESC>i
 inoremap [ []<ESC>i
-" inoremap { {}<ESC>i
 inoremap { {<ENTER>}<ESC>ko
 
-
 "******************************************************************************
-"    自动添加头文件注释
+"" "                          << 自动添加头文件注释 >>
 "******************************************************************************
-
 autocmd BufNewFile *.cpp,*.[ch],*.sh,*.java exec ":call SetTitle()"
 
 func SetTitle()
-  echom &filetype
-  if &filetype == 'cs'
-    call setline(1,"/*******************************************************************************") 
+  if &filetype == 'cpp'
+    call setline(1,"/*******************************************************************************")
     call append(line("."), " File Name: ".expand("%"))
     call append(line(".")+1, " Descript:")
     call append(line(".")+2, " ")
     call append(line(".")+3, " Version: 1.0")
-    call append(line(".")+4, " Created Time: ".strftime("%c"))
+    call append(line(".")+4, " Created Time: ".strftime("%D %T"))
     call append(line(".")+5, " Compiler: ")
     call append(line(".")+6, " Editor: vim")
     call append(line(".")+7, " Author: Jimbo")
@@ -120,23 +109,6 @@ func SetTitle()
     call append(line(".")+10, " Company: ")
     call append(line(".")+11, "*******************************************************************************/")
     call append(line(".")+12, "")
-    call append(line(".")+13, "using System;")
-  endif
-  if &filetype == 'cpp'
-    call setline(1,"/*******************************************************************************")
-    call append(line("."), " File Name: ".expand("%")) 
-    call append(line(".")+1, " Descript:") 
-    call append(line(".")+2, " ") 
-    call append(line(".")+3, " Version: 1.0") 
-    call append(line(".")+4, " Created Time: ".strftime("%D %T")) 
-    call append(line(".")+5, " Compiler: ")
-    call append(line(".")+6, " Editor: vim")
-    call append(line(".")+7, " Author: Jimbo") 
-    call append(line(".")+8, " mail: jimboo.lu@gmail.com") 
-    call append(line(".")+9, " ") 
-    call append(line(".")+10, " Company: ") 
-    call append(line(".")+11, "*******************************************************************************/")
-    call append(line(".")+12, "") 
     call append(line(".")+13, "#ifndef ".expand("%")) 
     call append(line(".")+14, "#define ".expand("%"))
     call append(line(".")+15, "#include <".expand("%").">")
@@ -164,28 +136,40 @@ func SetTitle()
   else
     call setline(1,"/*******************************************************************************")
     call append(line("."), " File Name: ".expand("%"))
-    call append(line(".")+1, " Descript:")
+    call append(line(".")+1, " Descript: ")
     call append(line(".")+2, " ")
-    call append(line(".")+3, " Version: 1.0")
-    call append(line(".")+4, " Created Time: ".strftime("%D %T"))
-    call append(line(".")+5, " Compiler: ")
-    call append(line(".")+6, " Editor: vim")
-    call append(line(".")+7, " Author: Jimbo")
-    call append(line(".")+8, " mail: jimboo.lu@gmail.com")
-    call append(line(".")+9, " ")
-    call append(line(".")+10, " Company: ")
-    call append(line(".")+11, "*******************************************************************************/")
-    call append(line(".")+12, "")
+    call append(line(".")+3, "Version: 1.0")
+    call append(line(".")+4, "Created Time: ".strftime("%D %T"))
+    call append(line(".")+5, "Compiler: ")
+    call append(line(".")+6, "Editor: vim")
+    call append(line(".")+7, "Author: Jimbo")
+    call append(line(".")+8, "Mail: jimboo.lu@gmail.com")
+    call append(line(".")+9, "Company: ")
+    call append(line(".")+10, "*******************************************************************************/") 
   endif
-  "新建文件后，自动定位到文件末尾
-  autocmd BufNewFile * normal G
+    autocmd BufNewFile * normal G 
 endfunc
 
-"*****************************************************************************
-"    编写文件时的配置
-"*****************************************************************************
+func SetBlockNote() 
+    call setline(1,"/*******************************************************************************") 
+    call append(line("."), "/// <summary>") 
+    call append(line(".")+1, "/// Add Description") 
+    call append(line(".")+2, "/// </summary>")
+    "新建文件后，自动定位到文件末尾
+    autocmd BufNewFile * normal G
+endfunc
 
-" 在不使用 MiniBufExplorer 插件时也可用<C-k,j,h,l>切换到上下左右的窗口中去
+func SetLine()
+    call append(line("."),"/********************************************************************************")
+    call append(line(".")+1," ")
+    call append(line(".")+2,"*******************************************************************************/")
+    autocmd BufNewFile * normal G
+endfunc
+
+
+"*****************************************************************************
+""                          <<  编写文件时的配置 >>
+"*****************************************************************************
 
 " 当文件在外部被修改，自动更新该文件
 set autoread
@@ -207,18 +191,6 @@ imap <c-h> <Left>
 
 " Ctrl + L 插入模式下光标向右移动
 imap <c-l> <Right>
-
-" F9 一键保存、编译、连接存并运行
-map <F9> :call Run()<CR>
-imap <F9> <ESC>:call Run()<CR>
-
-" Ctrl + F9 一键保存并编译
-map <c-F9> :call Compile()<CR>
-imap <c-F9> <ESC>:call Compile()<CR>
-
-" Ctrl + F10 一键保存并连接
-map <c-F10> :call Link()<CR>
-imap <c-F10> <ESC>:call Link()<CR>
 
 " 每行超过80个的字符用下划线标示
 au BufWinEnter * let w:m2=matchadd('Underlined', '\%>' . 80 . 'v.\+', -1)
