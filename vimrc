@@ -28,7 +28,7 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
-set rtp+=/home/vimcoders/.vim/bundle/Vundle.vim
+set rtp+=/usr/share/vim/vimfiles/bundle/Vundle.vim
 call vundle#begin('/usr/share/vim/vimfiles/bundle')
 
 Plugin 'VundleVim/Vundle.vim'
@@ -44,7 +44,7 @@ filetype plugin indent on    " required
 
 set nocompatible 
 set mouse=v
-syntax on 
+syntax on
 colorscheme molokai 
 set number 
 set cursorline 
@@ -196,14 +196,8 @@ autocmd VimEnter * nested if argc() == 0 && filereadable($HOME . "/.vim/Session.
 "*****************************************************************************
 "    
 "*****************************************************************************
-set encoding=utf-8                                    
-set fileencoding=utf-8                                
-set fileencodings=ucs-bom,utf-8,gbk,cp936,latin-1     
 
-set fileformat=unix                                   
-set fileformats=unix,dos,mac
-
-source $VIMRUNTIME/delmenu.vim
-source $VIMRUNTIME/menu.vim
-
-language messages zh_CN.utf-8
+set fileencodings=utf-8,gb2312,gbk,gb18030
+set termencoding=ut-8
+set fileformats=unix
+set encoding=prc
