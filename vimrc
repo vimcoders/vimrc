@@ -33,10 +33,13 @@ call vundle#begin('/usr/share/vim/vimfiles/bundle')
 
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'fatih/vim-go'
+Plugin 'Valloric/YouCompleteMe'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
+
+let g:ycm_global_ycm_extra_conf = '/usr/share/vim/vimfiles/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 
 "******************************************************************************
 ""                           < >
