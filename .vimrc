@@ -103,9 +103,12 @@ endfunc
 "******************************************************************************
 ""                                << write >>
 "******************************************************************************
-inoremap( ()<ESC>i
-inoremap[ []<ESC>i
-inoremap{ {<ENTER>}<ESC>ko
+set autoindent
+set smartindent
+set showmatch
+" inoremap( ()<ESC>i
+" inoremap[ []<ESC>i
+" inoremap{ {<ENTER>}<ESC>ko
 set autoread
 nmap cS :%s/\s+$//g<cr>:noh<cr>
 nmap cM :%s/\r$//g<cr>:noh<cr>
