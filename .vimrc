@@ -46,9 +46,9 @@ filetype plugin indent on    " required
 "" "                              << ycm >>
 "******************************************************************************
 let g:ycm_global_ycm_extra_config = '~/.ycm_extra_config.py'
-let g:ycm_collect_indentifiers_from_tags_files = 1
-let g:ycm_seed_indentifiers_with_syntax = 1
-let g:ycm_confirm_extra_conf = 0
+" let g:ycm_collect_indentifiers_from_tags_files = 1
+" let g:ycm_seed_indentifiers_with_syntax = 1
+" let g:ycm_confirm_extra_conf = 0
 
 "*******************************************************************************
 "" "                              << ctrl-p >>
@@ -93,7 +93,9 @@ syntax on
 "******************************************************************************
 "" "                              << Title >>
 "******************************************************************************
-autocmd BufNewFile *.cpp,*.[ch],*.sh exec ":call SetTitle()"
+autocmd BufNewFile *.cpp,*.[ch],*.sh, exec ":call SetTitle()"
+autocmd BufNewFile *.go exec ":call SetTitle()"
+autocmd BufNewFile * normal G
 
 func SetTitle()
     if (expand("%:e") == 'cpp')
@@ -123,6 +125,22 @@ func SetTitle()
 	call append(line(".")+6, " * Editor: vim ")
 	call append(line(".")+7, " * Author: Jimbo ")
 	call append(line(".")+8, " * Mail: jimboo.lu@gmail.com ")
+	call append(line(".")+9, " * ")
+	call append(line(".")+10, " * Company: ")
+	call append(line(".")+11, " */ ")
+	call append(line(".")+12, " ")
+    endif
+    if (expand("%:e") == 'go')
+	call setline(1, "/* ")
+	call append(line("."), " * File Name: ".expand("%"))
+	call append(line(".")+1, " * Descript: ")
+	call append(line(".")+2, " * ")
+	call append(line(".")+3, " * Version: 1.0 ")
+	call append(line(".")+4, " * Create Time: ".strftime("%D %T"))
+	call append(line(".")+5, " * Compiler: ")
+	call append(line(".")+6, " * Editor: vim ")
+	call append(line(".")+7, " * Author: Jimbo")
+	call append(line(".")+8, " * Mail: jimboo.lu@gmail.com")
 	call append(line(".")+9, " * ")
 	call append(line(".")+10, " * Company: ")
 	call append(line(".")+11, " */ ")
