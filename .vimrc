@@ -52,6 +52,47 @@ let g:ycm_global_ycm_extra_config = '~/.ycm_extra_config.py'
 " let g:ycm_confirm_extra_conf = 0
 
 "*******************************************************************************
+"" "                              << vim-go >>
+"*******************************************************************************
+au FileType go nmap <leader>r <Plug>(go-run)
+au FileType go nmap <leader>b <Plug>(go-build)
+au FileType go nmap <leader>t <Plug>(go-test)
+au FileType go nmap <leader>c <Plug>(go-coverage)
+au FileType go nmap <leader>ds <Plug>(go-def-split)
+au FileType go nmap <leader>dv <Plug>(go-def-vertical)
+au FileType go nmap <leader>dt <Plug>(go-def-tab)
+au FileType go nmap <leader>gd <Plug>(go-doc)
+au FileType go nmap <leader>gv <Plug>(go-doc-vertical)
+au FileType go nmap <leader>gb <Plug>(go-doc-browser)
+au FileType go nmap <leader>s <Plug>(go-implements)
+au FileType go nmap <leader>i <Plug>(go-info)
+au FileType go nmap <leader>e <Plug>(go-rename)
+au FileType go nmap <leader>rt <Plug>(go-run-tab)
+au FileType go nmap <leader>rs <Plug>(go-run-splith)
+au FileType go nmap <leader>rv <Plug>(go-run-vertical)
+
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_types = 1
+let go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+let g:go_fmt_command = "goimports"
+let g:go_fmt_fail_silently = 1
+let g:go_fmt_autosave = 0
+let g:go_play_open_browser = 0
+
+let g:go_bin_path = expand("~/.gotools")
+let g:go_bin_path = "/home/vimcoders/.mypath"
+let g:go_get_update = 0
+let g:go_term_mode = "split"
+let g:go_term_enabled = 1
+let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+let g_syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go']}
+let g:go_list_type = "quickfix"
+
+
+"*******************************************************************************
 "" "                              << ctrl-p >>
 "********************************************************************l***********
 "let g:ctrlp_map = 'p'
