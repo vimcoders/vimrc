@@ -37,6 +37,7 @@ Plugin 'Valloric/YouCompleteMe'
 "Plugin 'Raimondi/delimitMate'
 "Plugin 'ctrlpvim/ctrlp.vim'
 "Plugin 'tacahiroy/ctrlp-funky'
+Plugin 'fatih/vim-go'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -95,7 +96,6 @@ syntax on
 "******************************************************************************
 autocmd BufNewFile *.cpp,*.[ch],*.sh, exec ":call SetTitle()"
 autocmd BufNewFile *.go exec ":call SetTitle()"
-autocmd BufNewFile * normal G
 
 func SetTitle()
     if (expand("%:e") == 'cpp')
@@ -145,6 +145,16 @@ func SetTitle()
 	call append(line(".")+10, " * Company: ")
 	call append(line(".")+11, " */ ")
 	call append(line(".")+12, " ")
+	call append(line(".")+13, "package ".expand("%:r"))
+	call append(line(".")+14, "")
+	if (expand("%:r") == 'main')
+	    call append(line(".")+15, 'import "fmt"')
+	    call append(line(".")+16, "")
+	    call append(line(".")+17, "func main() {")
+	    call append(line(".")+18, '    fmt.Print("hello world")')
+	    call append(line(".")+19, "}")
+	    call append(line(".")+20, "")
+	endif
     endif
 "	autocmd BufNewFile * normal G
 endfunc
