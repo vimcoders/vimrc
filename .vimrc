@@ -83,7 +83,7 @@ let g:go_fmt_autosave = 0
 let g:go_play_open_browser = 0
 
 let g:go_bin_path = expand("~/.gotools")
-let g:go_bin_path = "/home/vimcoders/.mypath"
+"let g:go_bin_path = "/home/vimcoders/.mypath"
 let g:go_get_update = 0
 let g:go_term_mode = "split"
 let g:go_term_enabled = 1
