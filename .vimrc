@@ -37,7 +37,7 @@ Plugin 'Valloric/YouCompleteMe'
 "Plugin 'Raimondi/delimitMate'
 "Plugin 'ctrlpvim/ctrlp.vim'
 "Plugin 'tacahiroy/ctrlp-funky'
-Plugin 'fatih/vim-go'
+"Plugin 'fatih/vim-go'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -47,6 +47,16 @@ filetype plugin indent on    " required
 "" "                              << ycm >>
 "******************************************************************************
 let g:ycm_global_ycm_extra_config = '~/.ycm_extra_config.py'
+let g:ycm_error_symbol = '>>'
+let g:ycm_warning_symbol = '>*'
+let mapleader = ","
+
+" Ctrl+O Ctrl+I
+nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>
+nnoremap <leader>gd :YcmCompleter GoToDefinition<CR>
+nnoremap <leader>gg :YcmCompleter GoTOdefinitionElseDeclaration<CR>
+nmap <F4> :YcmDiags<CR>
+
 " let g:ycm_collect_indentifiers_from_tags_files = 1
 " let g:ycm_seed_indentifiers_with_syntax = 1
 " let g:ycm_confirm_extra_conf = 0
@@ -75,7 +85,7 @@ let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_fields = 1
 let g:go_highlight_types = 1
-let go_highlight_operators = 1
+let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_fmt_command = "goimports"
 let g:go_fmt_fail_silently = 1
@@ -88,7 +98,7 @@ let g:go_get_update = 0
 let g:go_term_mode = "split"
 let g:go_term_enabled = 1
 let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-let g_syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go']}
+let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go']}
 let g:go_list_type = "quickfix"
 
 
