@@ -34,6 +34,7 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'jiangmiao/auto-pairs'
 "Plugin 'Raimondi/delimitMate'
 "Plugin 'ctrlpvim/ctrlp.vim'
 "Plugin 'tacahiroy/ctrlp-funky'
@@ -213,12 +214,12 @@ endfunc
 "******************************************************************************
 ""                                << write >>
 "******************************************************************************
-inoremap( ()<ESC>i
-inoremap[ []<ESC>i
-inoremap{ {<ENTER>}<ESC>ko
-set autoread
-nmap cS :%s/\s+$//g<cr>:noh<cr>
-nmap cM :%s/\r$//g<cr>:noh<cr>
+"inoremap( ()<ESC>i
+"inoremap[ []<ESC>i
+"inoremap{ {<ENTER>}<ESC>ko
+"set autoread
+"nmap cS :%s/\s+$//g<cr>:noh<cr>
+"nmap cM :%s/\r$//g<cr>:noh<cr>
 imap <c-K> <Up>
 imap <c-j> <Down>
 imap <c-h> <Left>
