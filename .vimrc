@@ -36,9 +36,9 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'jiangmiao/auto-pairs'
 "Plugin 'Raimondi/delimitMate'
-"Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 "Plugin 'tacahiroy/ctrlp-funky'
-"Plugin 'fatih/vim-go'
+Plugin 'fatih/vim-go'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -106,19 +106,20 @@ let g:go_list_type = "quickfix"
 "*******************************************************************************
 "" "                              << ctrl-p >>
 "********************************************************************l***********
-"let g:ctrlp_map = 'p'
-"let g:ctrlp_cmd = 'CtrlP'
-"map f :CtrlPMRU
-"let g:ctrlp_custom_ignore = {
-"    \ 'dir': '\v[\/]\.(git|hg|svn|rvm)$',
-"    \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$',
-"    \}
-"let g:ctrlp_working_path_mode=0
-"let g:ctrlp_match_window_bottom=1
-"let g:ctrlp_max_height=15
-"let g:ctrlp_match_window_reversed=0
-"let g:ctrlp_mruf_max=500
-"let g_ctrlp_follow_symlinks=1
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_root_markers = ['pom.xml', '.prignor']
+let g:ctrlp_switch_buffer = 'et'
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
+let g:ctrlp_user_command = 'find %s -type f'
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 "*******************************************************************************
 "" "                             << ctrlp-funky >>
 "*******************************************************************************
