@@ -142,6 +142,7 @@ set encoding=utf-8
 set termencoding=utf-8
 set fencs=utf-8,gbk
 colorscheme molokai
+set hlsearch
 syntax on
 
 "******************************************************************************
