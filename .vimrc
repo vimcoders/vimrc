@@ -53,10 +53,10 @@ let g:ycm_warning_symbol = '>*'
 let mapleader = ","
 
 " Ctrl+O Ctrl+I
-nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>
-nnoremap <leader>gd :YcmCompleter GoToDefinition<CR>
-nnoremap <leader>gg :YcmCompleter GoTOdefinitionElseDeclaration<CR>
-nmap <F4> :YcmDiags<CR>
+"nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>
+"nnoremap <leader>gd :YcmCompleter GoToDefinition<CR>
+"nnoremap <leader>gg :YcmCompleter GoTOdefinitionElseDeclaration<CR>
+"nmap <F4> :YcmDiags<CR>
 
 " let g:ycm_collect_indentifiers_from_tags_files = 1
 " let g:ycm_seed_indentifiers_with_syntax = 1
@@ -65,22 +65,7 @@ nmap <F4> :YcmDiags<CR>
 "*******************************************************************************
 "" "                              << vim-go >>
 "*******************************************************************************
-au FileType go nmap <leader>r <Plug>(go-run)
-au FileType go nmap <leader>b <Plug>(go-build)
-au FileType go nmap <leader>t <Plug>(go-test)
-au FileType go nmap <leader>c <Plug>(go-coverage)
-au FileType go nmap <leader>ds <Plug>(go-def-split)
-au FileType go nmap <leader>dv <Plug>(go-def-vertical)
-au FileType go nmap <leader>dt <Plug>(go-def-tab)
-au FileType go nmap <leader>gd <Plug>(go-doc)
-au FileType go nmap <leader>gv <Plug>(go-doc-vertical)
-au FileType go nmap <leader>gb <Plug>(go-doc-browser)
-au FileType go nmap <leader>s <Plug>(go-implements)
-au FileType go nmap <leader>i <Plug>(go-info)
-au FileType go nmap <leader>e <Plug>(go-rename)
-au FileType go nmap <leader>rt <Plug>(go-run-tab)
-au FileType go nmap <leader>rs <Plug>(go-run-splith)
-au FileType go nmap <leader>rv <Plug>(go-run-vertical)
+nmap gr :GoReferrers<CR>
 
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
