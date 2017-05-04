@@ -39,6 +39,7 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'ctrlpvim/ctrlp.vim'
 "Plugin 'tacahiroy/ctrlp-funky'
 Plugin 'fatih/vim-go'
+Plugin 'scrooloose/nerdtree'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -105,6 +106,9 @@ let g:ctrlp_custom_ignore = {
   \ }
 let g:ctrlp_user_command = 'find %s -type f'
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+"******************************************************************************
+"" "                              << nerdtree>>
+"******************************************************************************
 "*******************************************************************************
 "" "                             << ctrlp-funky >>
 "*******************************************************************************
