@@ -37,9 +37,13 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'jiangmiao/auto-pairs'
 "Plugin 'Raimondi/delimitMate'
 Plugin 'ctrlpvim/ctrlp.vim'
-"Plugin 'tacahiroy/ctrlp-funky'
+Plugin 'tacahiroy/ctrlp-funky'
 Plugin 'fatih/vim-go'
 Plugin 'scrooloose/nerdtree'
+Plugin 'tomasr/molokai'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'vim-airline/vim-airline'
+Plugin 'rakr/vim-one'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -130,9 +134,9 @@ set backspace=indent,eol,start
 set encoding=utf-8
 set termencoding=utf-8
 set fencs=utf-8,gbk
-colorscheme molokai
 set hlsearch
 syntax on
+colorscheme molokai
 
 "******************************************************************************
 "" "                              << Title >>
