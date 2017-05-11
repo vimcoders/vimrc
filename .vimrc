@@ -37,13 +37,10 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'jiangmiao/auto-pairs'
 "Plugin 'Raimondi/delimitMate'
 Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'tacahiroy/ctrlp-funky'
+"Plugin 'tacahiroy/ctrlp-funky'
 Plugin 'fatih/vim-go'
 Plugin 'scrooloose/nerdtree'
-Plugin 'tomasr/molokai'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'vim-airline/vim-airline'
-Plugin 'rakr/vim-one'
+Plugin 'SirVer/ultisnips'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -126,6 +123,7 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standar
 set nocompatible "close vi
 set number "line number
 set ruler "status bar ruler
+set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 set nobackup
@@ -134,9 +132,14 @@ set backspace=indent,eol,start
 set encoding=utf-8
 set termencoding=utf-8
 set fencs=utf-8,gbk
+colorscheme molokai
 set hlsearch
 syntax on
-colorscheme molokai
+if &term=="xterm"
+    set t_Co=8
+    set t_Sb=^[[4%dm
+    set t_Sf=^[[3%dm
+endif
 
 "******************************************************************************
 "" "                              << Title >>
