@@ -139,6 +139,7 @@ set fencs=utf-8,gbk
 colorscheme molokai
 set hlsearch
 syntax on
+set ic
 if &term=="xterm"
     set t_Co=8
     set t_Sb=^[[4%dm
