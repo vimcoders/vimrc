@@ -44,8 +44,10 @@ Plugin 'SirVer/ultisnips'
 Plugin 'tomasr/molokai'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'rakr/vim-one'
 Plugin 'mileszs/ack.vim'
+Plugin 'sjl/gundo.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -126,11 +128,19 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standar
 "" "                              << vim-airline >>
 "******************************************************************************
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
 
 "******************************************************************************
 "" "                              << ag >>
 "******************************************************************************
 let g:ackprg = 'ag --nogroup --nocolor --column'
+
+"******************************************************************************
+"" "                              << gundo >>
+"******************************************************************************
+nnoremap <leader>h :GundoToggle<CR>
+
 "******************************************************************************
 "" "                              << view >>
 "******************************************************************************
