@@ -43,7 +43,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'SirVer/ultisnips'
 Plugin 'tomasr/molokai'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'vim-airline/vim-aireline'
+Plugin 'vim-airline/vim-airline'
 Plugin 'rakr/vim-one'
 Plugin 'mileszs/ack.vim'
 
@@ -123,7 +123,12 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standar
 "let g:ctrlp_funky_syntax_hightlight = 1
 "let g:ctrlp_extensions = ['funky']
 "******************************************************************************
-"" "                              << Title >>
+"" "                              << vim-airline >>
+"******************************************************************************
+let g:airline#extensions#tabline#enabled = 1
+
+"******************************************************************************
+"" "                              << ag >>
 "******************************************************************************
 let g:ackprg = 'ag --nogroup --nocolor --column'
 "******************************************************************************
