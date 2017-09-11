@@ -1,38 +1,39 @@
 # vimer
 it's IDE.
 
-1.clone vim source code
+1. clone vim source code
 
-  git clone https://github.com/vim/vim.git
+	git clone https://github.com/vim/vim.git
 
-2.compile
+2. compile
 
-  sudo apt-get install libncurses5-dev libgnome2-dev libgnomeui-dev 
+	sudo apt-get install libncurses5-dev libgnome2-dev libgnomeui-dev 
 
-  libgtk2.0-dev libatk1.0-dev libbonoboui2-dev libcairo2-dev libx11-dev 
+	libgtk2.0-dev libatk1.0-dev libbonoboui2-dev libcairo2-dev libx11-dev 
 
-  libxpm-dev libxt-dev python-dev ruby-dev mercurial
+	libxpm-dev libxt-dev python-dev ruby-dev mercurial
 
-  sudo apt-get remove vim  
+	sudo apt-get remove vim  
 
-  sudo apt-get remove vim-runtime  
+	sudo apt-get remove vim-runtime  
 
-  sudo apt-get remove gvim  
+	sudo apt-get remove gvim  
 
-  sudo apt-get remove vim-tiny  
+	sudo apt-get remove vim-tiny  
 
-  sudo apt-get remove vim-common  
+	sudo apt-get remove vim-common  
 
-  sudo apt-get remove vim-gui-common
-  
-  cd ./vim
-  ./configure --with-features=huge --enable-rubyinterp --enable-pythoninterp 
+	sudo apt-get remove vim-gui-common
 
-  --with-python-config-dir=/usr/lib/python2.7/config-i386-linux-gnu/ 
+	cd ./vim
 
-  --enable-perlinterp --enable-gui=gtk2 --enable-cscope --enable-luainterp 
+	./configure --with-features=huge --enable-rubyinterp --enable-pythoninterp 
 
-  --enable-perlinterp --enable-multibyte --prefix=/usr
+	--with-python-config-dir=/usr/lib/python2.7/config-i386-linux-gnu/ 
+
+	--enable-perlinterp --enable-gui=gtk2 --enable-cscope --enable-luainterp 
+
+	--enable-perlinterp --enable-multibyte --prefix=/usr
 
 
 需要重新配置可 输入 make distclean #清理一下上一次编译生成的所有文件
@@ -64,13 +65,13 @@ it's IDE.
 
   sudo make install
 
-  3. git clone https://github.com/vimcoders/vimer.git
+3. git clone https://github.com/vimcoders/vimer.git
 
      cp -rf .vim .vimrc ~/
 
      git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/
 
-  4.BundleInstall
+4. BundleInstall
 
      :BundleInstall
 
