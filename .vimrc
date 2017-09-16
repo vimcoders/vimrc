@@ -48,6 +48,7 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'rakr/vim-one'
 Plugin 'mileszs/ack.vim'
 Plugin 'sjl/gundo.vim'
+Plugin 'vim-scripts/grep.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
