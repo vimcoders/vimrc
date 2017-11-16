@@ -27,14 +27,7 @@ it's IDE.
 
 	cd ./vim
 
-	./configure --with-features=huge --enable-rubyinterp --enable-pythoninterp 
-
-	--with-python-config-dir=/usr/lib/python2.7/config-i386-linux-gnu/ 
-
-	--enable-perlinterp --enable-gui=gtk2 --enable-cscope --enable-luainterp 
-
-	--enable-perlinterp --enable-multibyte --prefix=/usr
-
+	./configure --enable-python3interp vi_cv_path_python3=/usr/local/bin/python3.2
 
 需要重新配置可 输入 make distclean #清理一下上一次编译生成的所有文件
 
