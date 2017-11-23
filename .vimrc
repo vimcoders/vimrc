@@ -40,7 +40,6 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'tacahiroy/ctrlp-funky'
 Plugin 'fatih/vim-go'
 Plugin 'scrooloose/nerdtree'
-Plugin 'SirVer/ultisnips'
 Plugin 'tomasr/molokai'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'vim-airline/vim-airline'
@@ -49,6 +48,8 @@ Plugin 'rakr/vim-one'
 Plugin 'mileszs/ack.vim'
 Plugin 'sjl/gundo.vim'
 Plugin 'vim-scripts/grep.vim'
+Plugin 'vim-scripts/lua.vim'
+Plugin 'xolox/vim-misc'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -143,6 +144,22 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 nnoremap <leader>h :GundoToggle<CR>
 
 "******************************************************************************
+"" "                          << lua >>
+"******************************************************************************
+" This sets the default value for all buffers.
+let g:lua_compiler_name = '/usr/local/bin/luac'
+
+" This is how you change the value for one buffer.
+let b:lua_compiler_name = '/usr/local/bin/lualint'"
+let g:lua_check_globals = 0
+let g:lua_complete_omni = 1
+" Here's the black list:
+let g:lua_omni_blacklist = ['pl\.strict', 'lgi\..']
+let g:lua_safe_omni_modules = 1
+let g:lua_define_completefunc = 0
+let g:lua_define_omnifunc = 0
+
+"******************************************************************************
 "" "                              << view >>
 "******************************************************************************
 set nocompatible "close vi
@@ -172,66 +189,72 @@ endif
 "******************************************************************************
 autocmd BufNewFile *.cpp,*.[ch],*.sh, exec ":call SetTitle()"
 autocmd BufNewFile *.go exec ":call SetTitle()"
+autocmd BufNewFile *.lua exec ":call SetTitle()"
 
 func SetTitle()
-    if (expand("%:e") == 'cpp')
-	call setline(1, "/* ")
-	call append(line("."), " * File Name: ".expand("%"))
-	call append(line(".")+1, " * Descript: ")
-	call append(line(".")+2, " * ")
-	call append(line(".")+3, " * Version: 1.0 ")
-	call append(line(".")+4, " * Created Time: ".strftime("%D %T"))
-	call append(line(".")+5, " * Compiler: ")
-	call append(line(".")+6, " * Editor: vim ")
-	call append(line(".")+7, " * Author: Jimbo ")
-	call append(line(".")+8, " * Mail: jimboo.lu@gmail.com ")
-	call append(line(".")+9, " *")
-	call append(line(".")+10, " * Company: ")
-	call append(line(".")+11, " */")
-	call append(line(".")+12, " ")
-    endif
-    if (expand("%:e") == 'h')
-	call setline(1, "/*")
-	call append(line("."), " * File Name: ".expand("%"))
-	call append(line(".")+1, " * Descript: ")
-	call append(line(".")+2, " * ")
-	call append(line(".")+3, " * Version: 1.0 ")
-	call append(line(".")+4, " * Created Time: ".strftime("%D %T"))
-	call append(line(".")+5, " * Compiler: ")
-	call append(line(".")+6, " * Editor: vim ")
-	call append(line(".")+7, " * Author: Jimbo ")
-	call append(line(".")+8, " * Mail: jimboo.lu@gmail.com ")
-	call append(line(".")+9, " * ")
-	call append(line(".")+10, " * Company: ")
-	call append(line(".")+11, " */ ")
-	call append(line(".")+12, " ")
-    endif
-    if (expand("%:e") == 'go')
-	call setline(1, "/* ")
-	call append(line("."), " * File Name: ".expand("%"))
-	call append(line(".")+1, " * Descript: ")
-	call append(line(".")+2, " * ")
-	call append(line(".")+3, " * Version: 1.0 ")
-	call append(line(".")+4, " * Create Time: ".strftime("%D %T"))
-	call append(line(".")+5, " * Compiler: ")
-	call append(line(".")+6, " * Editor: vim ")
-	call append(line(".")+7, " * Author: Jimbo")
-	call append(line(".")+8, " * Mail: jimboo.lu@gmail.com")
-	call append(line(".")+9, " * ")
-	call append(line(".")+10, " * Company: ")
-	call append(line(".")+11, " */ ")
-	call append(line(".")+12, " ")
-	call append(line(".")+13, "package ".expand("%:r"))
-	call append(line(".")+14, "")
-	if (expand("%:r") == 'main')
-	    call append(line(".")+15, 'import "fmt"')
-	    call append(line(".")+16, "")
-	    call append(line(".")+17, "func main() {")
-	    call append(line(".")+18, '    fmt.Print("hello world")')
-	    call append(line(".")+19, "}")
-	    call append(line(".")+20, "")
+	if (expand("%:e") == 'cpp')
+		call setline(1, "/* ")
+		call append(line("."), " * File Name: ".expand("%"))
+		call append(line(".")+1, " * Descript: ")
+		call append(line(".")+2, " * ")
+		call append(line(".")+3, " * Version: 1.0 ")
+		call append(line(".")+4, " * Created Time: ".strftime("%D %T"))
+		call append(line(".")+5, " * Compiler: ")
+		call append(line(".")+6, " * Editor: vim ")
+		call append(line(".")+7, " * Author: Jimbo ")
+		call append(line(".")+8, " * Mail: jimboo.lu@gmail.com ")
+		call append(line(".")+9, " *")
+		call append(line(".")+10, " * Company: ")
+		call append(line(".")+11, " */")
+		call append(line(".")+12, " ")
 	endif
-    endif
+	if (expand("%:e") == 'h')
+		call setline(1, "/*")
+		call append(line("."), " * File Name: ".expand("%"))
+		call append(line(".")+1, " * Descript: ")
+		call append(line(".")+2, " * ")
+		call append(line(".")+3, " * Version: 1.0 ")
+		call append(line(".")+4, " * Created Time: ".strftime("%D %T"))
+		call append(line(".")+5, " * Compiler: ")
+		call append(line(".")+6, " * Editor: vim ")
+		call append(line(".")+7, " * Author: Jimbo ")
+		call append(line(".")+8, " * Mail: jimboo.lu@gmail.com ")
+		call append(line(".")+9, " * ")
+		call append(line(".")+10, " * Company: ")
+		call append(line(".")+11, " */ ")
+		call append(line(".")+12, " ")
+	endif
+	if (expand("%:e") == 'go')
+		call setline(1, "/* ")
+		call append(line("."), " * File Name: ".expand("%"))
+		call append(line(".")+1, " * Descript: ")
+		call append(line(".")+2, " * ")
+		call append(line(".")+3, " * Version: 1.0 ")
+		call append(line(".")+4, " * Create Time: ".strftime("%D %T"))
+		call append(line(".")+5, " * Compiler: ")
+		call append(line(".")+6, " * Editor: vim ")
+		call append(line(".")+7, " * Author: Jimbo")
+		call append(line(".")+8, " * Mail: jimboo.lu@gmail.com")
+		call append(line(".")+9, " * ")
+		call append(line(".")+10, " * Company: ")
+		call append(line(".")+11, " */ ")
+		call append(line(".")+12, " ")
+	endif
+	if (expand("%:e") == 'lua')
+		call setline(1, "--")
+		call append(line("."), "-- File Name: ".expand("%"))
+		call append(line(".")+1, "-- Descript: ")
+		call append(line(".")+2, "-- ")
+		call append(line(".")+3, "-- Version: 1.0 ")
+		call append(line(".")+4, "-- Create Time: ".strftime("%D %T"))
+		call append(line(".")+5, "-- Compiler: ")
+		call append(line(".")+6, "-- Editor: vim ")
+		call append(line(".")+7, "-- Author: Jimbo")
+		call append(line(".")+8, "-- Mail: jimboo.lu@gmail.com")
+		call append(line(".")+9, "-- ")
+		call append(line(".")+10, "-- Company: ")
+		call append(line(".")+11, "-- ")
+	endif
 "	autocmd BufNewFile * normal G
 endfunc
 
