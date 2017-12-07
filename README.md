@@ -7,30 +7,11 @@ it's IDE.
 
 2. compile
 
-	sudo apt-get install libncurses5-dev libgnome2-dev libgnomeui-dev 
-
-	libgtk2.0-dev libatk1.0-dev libbonoboui2-dev libcairo2-dev libx11-dev 
-
-	libxpm-dev libxt-dev python-dev ruby-dev mercurial
-
-	sudo apt-get remove vim  
-
-	sudo apt-get remove vim-runtime  
-
-	sudo apt-get remove gvim  
-
-	sudo apt-get remove vim-tiny  
-
-	sudo apt-get remove vim-common  
-
-	sudo apt-get remove vim-gui-common
-
 	cd ./vim
 
-	./configure --enable-python3interp vi_cv_path_python3=/usr/local/bin/python3.2
+	./configure --enable-pythoninterp --with-python-config-dir=/usr/lib64/python2.7/config
 
 需要重新配置可 输入 make distclean #清理一下上一次编译生成的所有文件
-
 
 其中参数说明如下：
 
@@ -68,6 +49,3 @@ it's IDE.
 
     :BundleInstall
 
-    YouCompleteMe:https://github.com/Valloric/YouCompleteMe
-
-	vim-go:https://github.com/fatih/vim-go
