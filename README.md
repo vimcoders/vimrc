@@ -11,6 +11,10 @@ it's IDE.
 
 	./configure --enable-pythoninterp --with-python-config-dir=/usr/lib64/python2.7/config
 
+	make
+
+	make install
+
 需要重新配置可 输入 make distclean #清理一下上一次编译生成的所有文件
 
 其中参数说明如下：
