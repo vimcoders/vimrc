@@ -187,9 +187,17 @@ endif
 "******************************************************************************
 "" "                              << Title >>
 "******************************************************************************
-autocmd BufNewFile *.cpp,*.[ch],*.sh, exec ":call SetTitle()"
-autocmd BufNewFile *.go exec ":call SetTitle()"
-autocmd BufNewFile *.lua exec ":call SetTitle()"
+autocmd BufNewFile *.cpp,*.[ch],*.sh call SetTitle()
+autocmd BufNewFile *.go call SetTitle()
+autocmd BufNewFile *.lua call SetTitle()
+autocmd BufNewFile * normal G
+
+function! s:template_autocreate()
+  " create new template from scratch
+  if get(g:, "go_template_autocreate", 1)
+    call go#template#create()
+  endif
+endfunction
 
 func SetTitle()
 	if (expand("%:e") == 'cpp')
@@ -225,6 +233,8 @@ func SetTitle()
 		call append(line(".")+12, " ")
 	endif
 	if (expand("%:e") == 'go')
+		call s:template_autocreate()
+		normal gg
 		call setline(1, "/* ")
 		call append(line("."), " * File Name: ".expand("%"))
 		call append(line(".")+1, " * Descript: ")
@@ -238,7 +248,6 @@ func SetTitle()
 		call append(line(".")+9, " * ")
 		call append(line(".")+10, " * Company: ")
 		call append(line(".")+11, " */ ")
-		call append(line(".")+12, " ")
 	endif
 	if (expand("%:e") == 'lua')
 		call setline(1, "--")
@@ -255,7 +264,6 @@ func SetTitle()
 		call append(line(".")+10, "-- Company: ")
 		call append(line(".")+11, "-- ")
 	endif
-"	autocmd BufNewFile * normal G
 endfunc
 
 "******************************************************************************
