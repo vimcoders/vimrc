@@ -58,7 +58,7 @@ filetype plugin indent on    " required
 "******************************************************************************
 "" "                              << ycm >>
 "******************************************************************************
-let g:ycm_global_ycm_extra_config = '~/.ycm_extra_config.py'
+let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"
 let g:ycm_error_symbol = '>>'
 let g:ycm_warning_symbol = '>*'
 let mapleader = ","
