@@ -50,6 +50,7 @@ Plugin 'sjl/gundo.vim'
 Plugin 'vim-scripts/grep.vim'
 Plugin 'vim-scripts/lua.vim'
 Plugin 'xolox/vim-misc'
+Plugin 'flazz/vim-colorschemes'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -248,6 +249,22 @@ func SetTitle()
 		call append(line(".")+9, "-- ")
 		call append(line(".")+10, "-- Company: ")
 		call append(line(".")+11, "-- ")
+	endif
+	if (expand("%:e") == 'sh')
+		call setline(1, "#!/bin/bash")
+		call append(line("."), "# ")
+		call append(line(".")+1, "# File Name: ".expand("%"))
+		call append(line(".")+2, "# Descript: ")
+		call append(line(".")+3, "# ")
+		call append(line(".")+4, "# Version: 1.0 ")
+		call append(line(".")+5, "# Create Time: ".strftime("%D %T"))
+		call append(line(".")+6, "# Compiler: ")
+		call append(line(".")+7, "# Editor: vim ")
+		call append(line(".")+8, "# Author: Jimbo")
+		call append(line(".")+9, "# Mail: jimboo.lu@gmail.com")
+		call append(line(".")+10, "# ")
+		call append(line(".")+11, "# Company: ")
+		call append(line(".")+12, "# ")
 	endif
 endfunc
 
