@@ -1,34 +1,44 @@
-" Make external commands work through a pipe instead of a pseudo-tty
-"set noguipty
+source $VIMRUNTIME/vimrc_example.vim
 
-" You can also specify a different font, overriding the default font
-"if has('gui_gtk2')
-"  set guifont=Bitstream\ Vera\ Sans\ Mono\ 12
-"else
-"  set guifont=-misc-fixed-medium-r-normal--14-130-75-75-c-70-iso8859-1
-"endif
-
-" If you want to run gvim with a dark background, try using a different
-" colorscheme or running 'gvim -reverse'.
-" http://www.cs.cmu.edu/~maverick/VimColorSchemeTest/ has examples and
-" downloads for the colorschemes on vim.org
-
-" Source a global configuration file if available
-if filereadable("/etc/vim/gvimrc.local")
-  source /etc/vim/gvimrc.local
-endif
+set diffexpr=MyDiff()
+function MyDiff()
+  let opt = '-a --binary '
+  if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
+  if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
+  let arg1 = v:fname_in
+  if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
+  let arg2 = v:fname_new
+  if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
+  let arg3 = v:fname_out
+  if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
+  if $VIMRUNTIME =~ ' '
+    if &sh =~ '\<cmd'
+      if empty(&shellxquote)
+        let l:shxq_sav = ''
+        set shellxquote&
+      endif
+      let cmd = '"' . $VIMRUNTIME . '\diff"'
+    else
+      let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
+    endif
+  else
+    let cmd = $VIMRUNTIME . '\diff'
+  endif
+  silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3
+  if exists('l:shxq_sav')
+    let &shellxquote=l:shxq_sav
+  endif
+endfunction
 
 "******************************************************************************
 "" "                          << vundle >>
 "******************************************************************************
-
-" git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
+let path='~/.vim/bundle'
 call vundle#begin()
 
 " let Vundle manage Vundle, required
@@ -51,10 +61,51 @@ Plugin 'vim-scripts/grep.vim'
 Plugin 'vim-scripts/lua.vim'
 Plugin 'xolox/vim-misc'
 Plugin 'flazz/vim-colorschemes'
+"Plugin 'Lokaltog/vim-powerline'
+Plugin 'tpope/vim-fugitive'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
+
+"******************************************************************************
+"" "                              << view >>
+"******************************************************************************
+set nocompatible "close vi
+set number "line number
+set ruler "status bar ruler
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set nobackup
+set smartindent "new line auto tab
+set backspace=indent,eol,start
+colorscheme molokai
+set hlsearch
+syntax on
+set ic
+if &term=="xterm"
+    set t_Co=8
+    set t_Sb=^[[4%dm
+    set t_Sf=^[[3%dm
+endif
+au GUIEnter * simalt ~x 
+if has("gui_running")
+	set guioptions-=m 
+	set guioptions-=T
+	set guioptions-=L
+	set guioptions-=r
+	set guifont=Ubuntu_Mono_derivative_Powerlin:h12
+	"set guioptions-=b
+	"set showtabline=0
+endif
+
+set fenc=utf-8
+set encoding=utf-8
+set fileencodings=utf-8,gbk,cp936,latin-1
+source $VIMRUNTIME/delmenu.vim
+source $VIMRUNTIME/menu.vim
+language messages zh_CN.utf-8
 
 "******************************************************************************
 "" "                              << ycm >>
@@ -99,7 +150,6 @@ let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go']}
 let g:go_list_type = "quickfix"
 
-
 "*******************************************************************************
 "" "                              << ctrl-p >>
 "********************************************************************l***********
@@ -117,22 +167,27 @@ let g:ctrlp_custom_ignore = {
   \ }
 let g:ctrlp_user_command = 'find %s -type f'
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
-"******************************************************************************
-"" "                              << nerdtree>>
-"******************************************************************************
-"*******************************************************************************
-"" "                             << ctrlp-funky >>
-"*******************************************************************************
-"nnoremap fu :CtrlPFunky
-"nnoremap fu :execute 'CtrlpFunky ' . expand('')
-"let g:ctrlp_funky_syntax_hightlight = 1
-"let g:ctrlp_extensions = ['funky']
+
 "******************************************************************************
 "" "                              << vim-airline >>
 "******************************************************************************
+set t_Co=256
+set laststatus=2 
+let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#branch#enabled = 1
+if !exists('g:airline_symbols') 
+	let g:airline_symbols={} 
+endif
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = '☰'
+let g:airline_symbols.maxlinenr = ''
+let g:airline#extensions#tabline#fnamemod = ':t:.'
 
 "******************************************************************************
 "" "                              << ag >>
@@ -161,31 +216,6 @@ let g:lua_define_completefunc = 0
 let g:lua_define_omnifunc = 0
 
 "******************************************************************************
-"" "                              << view >>
-"******************************************************************************
-set nocompatible "close vi
-set number "line number
-set ruler "status bar ruler
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
-set nobackup
-set smartindent "new line auto tab
-set backspace=indent,eol,start
-set encoding=utf-8
-set termencoding=utf-8
-set fencs=utf-8,gbk
-colorscheme molokai
-set hlsearch
-syntax on
-set ic
-if &term=="xterm"
-    set t_Co=8
-    set t_Sb=^[[4%dm
-    set t_Sf=^[[3%dm
-endif
-
-"******************************************************************************
 "" "                              << Title >>
 "******************************************************************************
 autocmd BufNewFile *.cpp,*.[ch],*.sh call SetTitle()
@@ -201,9 +231,10 @@ function! s:template_autocreate()
 endfunction
 
 func SetTitle()
-	if (expand("%:e") == 'cpp' || expand("%:e") == 'c' || expand("%e") == 'h')
+	echo expand("%:t")
+	if (expand("%:e") == 'cpp' || expand("%:e") == 'c' || expand("%:e") == 'h')
 		call setline(1, "/* ")
-		call append(line("."), " * File Name: ".expand("%"))
+		call append(line("."), " * File Name: ".expand("%:t"))
 		call append(line(".")+1, " * Descript: ")
 		call append(line(".")+2, " * ")
 		call append(line(".")+3, " * Version: 1.0 ")
@@ -221,7 +252,7 @@ func SetTitle()
 		call s:template_autocreate()
 		normal ggO
 		call setline(1, "/* ")
-		call append(line("."), " * File Name: ".expand("%"))
+		call append(line("."), " * File Name: ".expand("%:t"))
 		call append(line(".")+1, " * Descript: ")
 		call append(line(".")+2, " * ")
 		call append(line(".")+3, " * Version: 1.0 ")
@@ -237,7 +268,7 @@ func SetTitle()
 	endif
 	if (expand("%:e") == 'lua')
 		call setline(1, "--")
-		call append(line("."), "-- File Name: ".expand("%"))
+		call append(line("."), "-- File Name: ".expand("%:t"))
 		call append(line(".")+1, "-- Descript: ")
 		call append(line(".")+2, "-- ")
 		call append(line(".")+3, "-- Version: 1.0 ")
@@ -281,11 +312,13 @@ imap <c-K> <Up>
 imap <c-j> <Down>
 imap <c-h> <Left>
 imap <c-l> <Right>
-" au BufWinEnter * let w:m2=matchadd('Underlined', '\%>' . 80 . 'v.\+', -1)
-autocmd Vimleave * nested if (!isdirectory($HOME. "/.vim")) |
-	\ call mkdir($HOME . "/.vim") |
-	\ endif |
-	\ execute "mksession!" . $HOME . "/.vim/Session.vim"
+"au BufWinEnter * let w:m2=matchadd('Underlined', '\%>' . 80 . 'v.\+', -1)
+"autocmd Vimleave * nested if (!isdirectory($HOME. "/.vim")) |
+"	\ call mkdir($HOME . "/.vim") |
+"	\ endif |
+"	\ execute "mksession!" . $HOME . "/.vim/Session.vim"
+"
+"autocmd VimEnter * nested if argc() == 0 && filereadable($HOME . "/.vim/Session.vim") |
+"\ execute "source " . $HOME . "/.vim/Session.vim"
 
-autocmd VimEnter * nested if argc() == 0 && filereadable($HOME . "/.vim/Session.vim") |
-	\ execute "source " . $HOME . "/.vim/Session.vim"
+set nobackup
