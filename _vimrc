@@ -29,6 +29,7 @@ function MyDiff()
     let &shellxquote=l:shxq_sav
   endif
 endfunction
+
 "******************************************************************************
 "" "                          << vundle >>
 "******************************************************************************
@@ -66,6 +67,45 @@ Plugin 'tpope/vim-fugitive'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
+
+"******************************************************************************
+"" "                              << view >>
+"******************************************************************************
+set nocompatible "close vi
+set number "line number
+set ruler "status bar ruler
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set nobackup
+set smartindent "new line auto tab
+set backspace=indent,eol,start
+colorscheme molokai
+set hlsearch
+syntax on
+set ic
+if &term=="xterm"
+    set t_Co=8
+    set t_Sb=^[[4%dm
+    set t_Sf=^[[3%dm
+endif
+au GUIEnter * simalt ~x 
+if has("gui_running")
+	set guioptions-=m 
+	set guioptions-=T
+	set guioptions-=L
+	set guioptions-=r
+	set guifont=Ubuntu_Mono_derivative_Powerlin:h12
+	"set guioptions-=b
+	"set showtabline=0
+endif
+
+set fenc=utf-8
+set encoding=utf-8
+set fileencodings=utf-8,gbk,cp936,latin-1
+source $VIMRUNTIME/delmenu.vim
+source $VIMRUNTIME/menu.vim
+language messages zh_CN.utf-8
 
 "******************************************************************************
 "" "                              << ycm >>
@@ -127,16 +167,7 @@ let g:ctrlp_custom_ignore = {
   \ }
 let g:ctrlp_user_command = 'find %s -type f'
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
-"******************************************************************************
-"" "                              << nerdtree>>
-"******************************************************************************
-"*******************************************************************************
-"" "                             << ctrlp-funky >>
-"*******************************************************************************
-"nnoremap fu :CtrlPFunky
-"nnoremap fu :execute 'CtrlpFunky ' . expand('')
-"let g:ctrlp_funky_syntax_hightlight = 1
-"let g:ctrlp_extensions = ['funky']
+
 "******************************************************************************
 "" "                              << vim-airline >>
 "******************************************************************************
@@ -148,6 +179,15 @@ let g:airline#extensions#branch#enabled = 1
 if !exists('g:airline_symbols') 
 	let g:airline_symbols={} 
 endif
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = '☰'
+let g:airline_symbols.maxlinenr = ''
+let g:airline#extensions#tabline#fnamemod = ':t:.'
 
 "******************************************************************************
 "" "                              << ag >>
@@ -176,45 +216,6 @@ let g:lua_define_completefunc = 0
 let g:lua_define_omnifunc = 0
 
 "******************************************************************************
-"" "                              << view >>
-"******************************************************************************
-set nocompatible "close vi
-set number "line number
-set ruler "status bar ruler
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
-set nobackup
-set smartindent "new line auto tab
-set backspace=indent,eol,start
-colorscheme molokai
-set hlsearch
-syntax on
-set ic
-if &term=="xterm"
-    set t_Co=8
-    set t_Sb=^[[4%dm
-    set t_Sf=^[[3%dm
-endif
-au GUIEnter * simalt ~x 
-if has("gui_running")
-	set guioptions-=m 
-	set guioptions-=T
-	set guioptions-=L
-	set guioptions-=r
-	set guifont=Ubuntu_Mono_derivative_Powerlin:h12
-	"set guioptions-=b
-	"set showtabline=0
-endif
-
-set fenc=utf-8
-set encoding=utf-8
-set fileencodings=utf-8,gbk,cp936,latin-1
-source $VIMRUNTIME/delmenu.vim
-source $VIMRUNTIME/menu.vim
-language messages zh_CN.utf-8
-
-"******************************************************************************
 "" "                              << Title >>
 "******************************************************************************
 autocmd BufNewFile *.cpp,*.[ch],*.sh call SetTitle()
@@ -230,9 +231,10 @@ function! s:template_autocreate()
 endfunction
 
 func SetTitle()
-	if (expand("%:e") == 'cpp' || expand("%:e") == 'c' || expand("%e") == 'h')
+	echo expand("%:t")
+	if (expand("%:e") == 'cpp' || expand("%:e") == 'c' || expand("%:e") == 'h')
 		call setline(1, "/* ")
-		call append(line("."), " * File Name: ".expand("%"))
+		call append(line("."), " * File Name: ".expand("%:t"))
 		call append(line(".")+1, " * Descript: ")
 		call append(line(".")+2, " * ")
 		call append(line(".")+3, " * Version: 1.0 ")
@@ -250,7 +252,7 @@ func SetTitle()
 		call s:template_autocreate()
 		normal ggO
 		call setline(1, "/* ")
-		call append(line("."), " * File Name: ".expand("%"))
+		call append(line("."), " * File Name: ".expand("%:t"))
 		call append(line(".")+1, " * Descript: ")
 		call append(line(".")+2, " * ")
 		call append(line(".")+3, " * Version: 1.0 ")
@@ -266,7 +268,7 @@ func SetTitle()
 	endif
 	if (expand("%:e") == 'lua')
 		call setline(1, "--")
-		call append(line("."), "-- File Name: ".expand("%"))
+		call append(line("."), "-- File Name: ".expand("%:t"))
 		call append(line(".")+1, "-- Descript: ")
 		call append(line(".")+2, "-- ")
 		call append(line(".")+3, "-- Version: 1.0 ")
