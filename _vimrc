@@ -95,7 +95,7 @@ if has("gui_running")
 	set guioptions-=T
 	set guioptions-=L
 	set guioptions-=r
-	set guifont=Ubuntu_Mono_derivative_Powerlin:h12
+	set guifont=Powerline_Consolas:h12
 	"set guioptions-=b
 	"set showtabline=0
 endif
