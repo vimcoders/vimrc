@@ -63,6 +63,7 @@ Plugin 'xolox/vim-misc'
 Plugin 'flazz/vim-colorschemes'
 "Plugin 'Lokaltog/vim-powerline'
 Plugin 'tpope/vim-fugitive'
+Plugin 'othree/html5.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -89,7 +90,7 @@ if &term=="xterm"
     set t_Sb=^[[4%dm
     set t_Sf=^[[3%dm
 endif
-au GUIEnter * simalt ~x 
+" au GUIEnter * simalt ~x 
 if has("gui_running")
 	set guioptions-=m 
 	set guioptions-=T
