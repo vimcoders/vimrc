@@ -64,6 +64,7 @@ Plugin 'flazz/vim-colorschemes'
 "Plugin 'Lokaltog/vim-powerline'
 Plugin 'tpope/vim-fugitive'
 Plugin 'othree/html5.vim'
+Plugin 'godlygeek/tabular'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -72,6 +73,7 @@ filetype plugin indent on    " required
 "******************************************************************************
 "" "                              << view >>
 "******************************************************************************
+set mouse=a
 set nocompatible "close vi
 set number "line number
 set ruler "status bar ruler
@@ -96,7 +98,7 @@ if has("gui_running")
 	set guioptions-=T
 	set guioptions-=L
 	set guioptions-=r
-	set guifont=Powerline_Consolas:h12
+	set guifont=Powerline_Consolas:h13
 	"set guioptions-=b
 	"set showtabline=0
 endif
@@ -314,13 +316,13 @@ imap <c-j> <Down>
 imap <c-h> <Left>
 imap <c-l> <Right>
 "au BufWinEnter * let w:m2=matchadd('Underlined', '\%>' . 80 . 'v.\+', -1)
-"autocmd Vimleave * nested if (!isdirectory($HOME. "/.vim")) |
-"	\ call mkdir($HOME . "/.vim") |
-"	\ endif |
-"	\ execute "mksession!" . $HOME . "/.vim/Session.vim"
-"
-"autocmd VimEnter * nested if argc() == 0 && filereadable($HOME . "/.vim/Session.vim") |
-"\ execute "source " . $HOME . "/.vim/Session.vim"
+autocmd Vimleave * nested if (!isdirectory($HOME. "/.vim")) |
+	\ call mkdir($HOME . "/.vim") |
+	\ endif |
+	\ execute "mksession!" . $HOME . "/.vim/Session.vim"
+
+autocmd VimEnter * nested if argc() == 0 && filereadable($HOME . "/.vim/Session.vim") |
+\ execute "source " . $HOME . "/.vim/Session.vim"
 
 set nobackup
 set noswapfile
