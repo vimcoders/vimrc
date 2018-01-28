@@ -65,6 +65,8 @@ Plugin 'flazz/vim-colorschemes'
 Plugin 'tpope/vim-fugitive'
 Plugin 'othree/html5.vim'
 Plugin 'godlygeek/tabular'
+Plugin 'junegunn/vim-easy-align'
+Plugin 'vim-syntastic/syntastic'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
