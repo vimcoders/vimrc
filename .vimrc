@@ -305,8 +305,8 @@ endfunction
 " 插入模式按 Ctrl + D(ate) 插入当前时间
 imap <C-d> <C-r>=GetTimeInfo()<cr>
 
-autocmd BufWrite *.go :GoFmt
-autocmd BufWrite *.go :GoImports
+autocmd BufWritePre *.go :GoFmt
+autocmd BufWritePre *.go :GoImports
 
 "******************************************************************************
 "               基础命令
