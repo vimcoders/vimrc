@@ -41,8 +41,8 @@ filetype plugin indent on
 "******************************************************************************
 "" "                              << view >>
 "******************************************************************************
-syntax enable
-syntax on
+set noic
+set cursorline
 set autoread
 set smarttab
 set showcmd 
@@ -58,7 +58,6 @@ set nobackup
 set smartindent
 set backspace=indent,eol,start
 set hlsearch
-syntax on
 if &term=="xterm"
     set t_Co=8
     set t_Sb=^[[4%dm
@@ -279,6 +278,7 @@ endfunc
 "******************************************************************************
 ""                                << write >>
 "******************************************************************************
+let g:AutoPairsMapCh = 0
 imap <c-K> <Up>
 imap <c-j> <Down>
 imap <c-h> <Left>
@@ -295,7 +295,6 @@ autocmd VimEnter * nested if argc() == 0 && filereadable($HOME . "/.vim/Session.
 set nobackup
 set noswapfile
 set noundofile
-set noic
 " 返回当前时间
 func! GetTimeInfo()
     "return strftime('%Y-%m-%d %A %H:%M:%S')
