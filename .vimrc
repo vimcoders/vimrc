@@ -1,6 +1,6 @@
 "2018-03-03 00:27:33
 "******************************************************************************
-"" "                          << vundle >>
+"" "                           vundle 
 "******************************************************************************
 set nocompatible
 filetype off
@@ -39,7 +39,7 @@ call vundle#end()
 filetype plugin indent on
 
 "******************************************************************************
-"" "                              << view >>
+"" "                               view 
 "******************************************************************************
 set noic
 set cursorline
@@ -58,6 +58,15 @@ set nobackup
 set smartindent
 set backspace=indent,eol,start
 set hlsearch
+
+" 控制台响铃
+set noerrorbells
+set novisualbell
+set t_vb= 
+
+" 状态栏显示目前所执行的指令
+set showcmd 
+
 if &term=="xterm"
     set t_Co=8
     set t_Sb=^[[4%dm
@@ -81,7 +90,7 @@ language messages zh_CN.utf-8
 colorscheme molokai
 
 "******************************************************************************
-"" "                              << ycm >>
+"" "                               ycm 
 "******************************************************************************
 let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"
 let g:ycm_error_symbol = '>>'
@@ -99,7 +108,7 @@ let mapleader = ","
 " let g:ycm_confirm_extra_conf = 0
 
 "*******************************************************************************
-"" "                              << vim-go >>
+"" "                               vim-go 
 "*******************************************************************************
 nmap gr :GoReferrers<CR>
 
@@ -123,7 +132,7 @@ let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go']}
 let g:go_list_type = "quickfix"
 
 "*******************************************************************************
-"" "                              << ctrl-p >>
+"" "                               ctrl-p 
 "********************************************************************l***********
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
@@ -141,7 +150,7 @@ let g:ctrlp_user_command = 'find %s -type f'
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
 "******************************************************************************
-"" "                              << vim-airline >>
+"" "                               vim-airline 
 "******************************************************************************
 set t_Co=256
 set laststatus=2 
@@ -162,22 +171,23 @@ let g:airline_symbols.maxlinenr = ''
 let g:airline#extensions#tabline#fnamemod = ':t:.'
 
 "******************************************************************************
-"" "                              << ag >>
+"" "                              ag 
 "******************************************************************************
 let g:ackprg = 'ag --nogroup --nocolor --column'
 
 "******************************************************************************
-"" "                              << gundo >>
+"" "                               gundo 
 "******************************************************************************
 nnoremap <leader>h :GundoToggle<CR>
 
 "******************************************************************************
-"" "                          << easy-align >>
+"" "                           easy-align 
 "******************************************************************************
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EashAlign)
+
 "******************************************************************************
-"" "                          << lua >>
+"" "                           lua 
 "******************************************************************************
 let g:lua_compiler_name = '/usr/local/bin/luac'
 
@@ -190,7 +200,7 @@ let g:lua_define_completefunc = 0
 let g:lua_define_omnifunc = 0
 
 "******************************************************************************
-"" "                              << Title >>
+"" "                               Title 
 "******************************************************************************
 autocmd BufNewFile *.cpp call SetTitle()
 autocmd BufNewFile *.h call SetTitle()
@@ -276,7 +286,7 @@ func SetTitle()
 endfunc
 
 "******************************************************************************
-""                                << write >>
+""                                 write 
 "******************************************************************************
 let g:AutoPairsMapCh = 0
 imap <c-K> <Up>
@@ -295,6 +305,7 @@ autocmd VimEnter * nested if argc() == 0 && filereadable($HOME . "/.vim/Session.
 set nobackup
 set noswapfile
 set noundofile
+
 " 返回当前时间
 func! GetTimeInfo()
     "return strftime('%Y-%m-%d %A %H:%M:%S')
@@ -304,8 +315,8 @@ endfunction
 " 插入模式按 Ctrl + D(ate) 插入当前时间
 imap <C-d> <C-r>=GetTimeInfo()<cr>
 
-autocmd BufWritePre *.go :GoFmt
 autocmd BufWritePre *.go :GoImports
+autocmd BufWritePre *.go :GoFmt
 
 "******************************************************************************
 "               基础命令
