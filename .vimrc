@@ -2,9 +2,6 @@
 "******************************************************************************
 "" "                           vundle 
 "******************************************************************************
-set nocompatible
-filetype off
-
 set rtp+=~/.vim/bundle/Vundle.vim
 let path='~/.vim/bundle'
 call vundle#begin()
@@ -37,57 +34,6 @@ Plugin 'airblade/vim-gitgutter'
 
 call vundle#end()
 filetype plugin indent on
-
-"******************************************************************************
-"" "                               view 
-"******************************************************************************
-set noic
-set cursorline
-set autoread
-set smarttab
-set showcmd 
-set history=400
-set mouse=a
-set nocompatible
-set number
-set ruler
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
-set nobackup
-set smartindent
-set backspace=indent,eol,start
-set hlsearch
-
-" 控制台响铃
-set noerrorbells
-set novisualbell
-set t_vb= 
-
-" 状态栏显示目前所执行的指令
-set showcmd 
-
-if &term=="xterm"
-    set t_Co=8
-    set t_Sb=^[[4%dm
-    set t_Sf=^[[3%dm
-endif
-" au GUIEnter * simalt ~x 
-if has("gui_running")
-	set guioptions-=m 
-	set guioptions-=T
-	set guioptions-=L
-	set guioptions-=r
-	set guifont=Powerline_Consolas:h13
-endif
-
-set fenc=utf-8
-set encoding=utf-8
-set fileencodings=utf-8,gbk,cp936,latin-1
-source $VIMRUNTIME/delmenu.vim
-source $VIMRUNTIME/menu.vim
-language messages zh_CN.utf-8
-colorscheme molokai
 
 "******************************************************************************
 "" "                               ycm 
@@ -286,6 +232,56 @@ func SetTitle()
 endfunc
 
 "******************************************************************************
+"" "                               view 
+"******************************************************************************
+syntax on
+filetype off
+set nocompatible
+set cursorline
+set smarttab
+set showcmd 
+set history=400
+set mouse=a
+set number
+set ruler
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set smartindent
+set backspace=indent,eol,start
+set hlsearch
+
+" 控制台响铃
+set noerrorbells
+set novisualbell
+set t_vb= 
+
+" 状态栏显示目前所执行的指令
+set showcmd 
+
+if &term=="xterm"
+    set t_Co=8
+    set t_Sb=^[[4%dm
+    set t_Sf=^[[3%dm
+endif
+" au GUIEnter * simalt ~x 
+if has("gui_running")
+	set guioptions-=m 
+	set guioptions-=T
+	set guioptions-=L
+	set guioptions-=r
+	set guifont=Powerline_Consolas:h13
+endif
+
+set fenc=utf-8
+set encoding=utf-8
+set fileencodings=utf-8,gbk,cp936,latin-1
+source $VIMRUNTIME/delmenu.vim
+source $VIMRUNTIME/menu.vim
+language messages zh_CN.utf-8
+colorscheme molokai
+
+"******************************************************************************
 ""                                 write 
 "******************************************************************************
 let g:AutoPairsMapCh = 0
@@ -305,6 +301,8 @@ autocmd VimEnter * nested if argc() == 0 && filereadable($HOME . "/.vim/Session.
 set nobackup
 set noswapfile
 set noundofile
+set noic
+set autoread
 
 " 返回当前时间
 func! GetTimeInfo()
