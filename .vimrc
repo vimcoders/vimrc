@@ -1,7 +1,5 @@
 "2018-03-03 00:27:33
-"******************************************************************************
-"" "                           vundle 
-"******************************************************************************
+"" "	vundle                           
 set rtp+=~/.vim/bundle/Vundle.vim
 let path='~/.vim/bundle'
 call vundle#begin()
@@ -33,11 +31,89 @@ Plugin 'vim-syntastic/syntastic'
 Plugin 'airblade/vim-gitgutter'
 
 call vundle#end()
+
+"" "	view                              
+set cursorline
+set smarttab
+set showcmd 
+set history=400
+set mouse=a
+set nocompatible
+set number
+set ruler
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set smartindent
+set backspace=indent,eol,start
+set hlsearch
+
+" 控制台响铃
+set noerrorbells
+set novisualbell
+set t_vb= 
+
+" 状态栏显示目前所执行的指令
+set showcmd 
+
+if &term=="xterm"
+    set t_Co=8
+    set t_Sb=^[[4%dm
+    set t_Sf=^[[3%dm
+endif
+" au GUIEnter * simalt ~x 
+if has("gui_running")
+	set guioptions-=m 
+	set guioptions-=T
+	set guioptions-=L
+	set guioptions-=r
+	set guifont=Powerline_Consolas:h13
+endif
+
+set fenc=utf-8
+set encoding=utf-8
+set fileencodings=utf-8,gbk,cp936,latin-1
+source $VIMRUNTIME/delmenu.vim
+source $VIMRUNTIME/menu.vim
+language messages zh_CN.utf-8
+colorscheme molokai
+
+"" "write                                  
+let g:AutoPairsMapCh = 0
+imap <c-K> <Up>
+imap <c-j> <Down>
+imap <c-h> <Left>
+imap <c-l> <Right>
+"au BufWinEnter * let w:m2=matchadd('Underlined', '\%>' . 80 . 'v.\+', -1)
+autocmd Vimleave * nested if (!isdirectory($HOME. "/.vim")) |
+	\ call mkdir($HOME . "/.vim") |
+	\ endif |
+	\ execute "mksession!" . $HOME . "/.vim/Session.vim"
+
+autocmd VimEnter * nested if argc() == 0 && filereadable($HOME . "/.vim/Session.vim") |
+\ execute "source " . $HOME . "/.vim/Session.vim"
+
+set nobackup
+set noswapfile
+set noundofile
+set autoread
+set noic
+filetype off
 filetype plugin indent on
 
-"******************************************************************************
-"" "                               ycm 
-"******************************************************************************
+" 返回当前时间
+func! GetTimeInfo()
+    "return strftime('%Y-%m-%d %A %H:%M:%S')
+    return strftime('%Y-%m-%d %H:%M:%S')
+endfunction
+
+" 插入模式按 Ctrl + D(ate) 插入当前时间
+imap <C-d> <C-r>=GetTimeInfo()<cr>
+
+autocmd BufWritePre *.go :GoImports
+autocmd BufWritePre *.go :GoFmt
+
+"" "	ycm                                
 let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"
 let g:ycm_error_symbol = '>>'
 let g:ycm_warning_symbol = '>*'
@@ -53,9 +129,7 @@ let mapleader = ","
 " let g:ycm_seed_indentifiers_with_syntax = 1
 " let g:ycm_confirm_extra_conf = 0
 
-"*******************************************************************************
-"" "                               vim-go 
-"*******************************************************************************
+"" "	vim-go
 nmap gr :GoReferrers<CR>
 
 let g:go_highlight_functions = 1
@@ -77,9 +151,7 @@ let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go']}
 let g:go_list_type = "quickfix"
 
-"*******************************************************************************
-"" "                               ctrl-p 
-"********************************************************************l***********
+"" "	ctrl-p
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
@@ -95,9 +167,7 @@ let g:ctrlp_custom_ignore = {
 let g:ctrlp_user_command = 'find %s -type f'
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
-"******************************************************************************
-"" "                               vim-airline 
-"******************************************************************************
+"" "	vim-airline 
 set t_Co=256
 set laststatus=2 
 let g:airline_powerline_fonts = 1
@@ -116,25 +186,17 @@ let g:airline_symbols.linenr = '☰'
 let g:airline_symbols.maxlinenr = ''
 let g:airline#extensions#tabline#fnamemod = ':t:.'
 
-"******************************************************************************
-"" "                              ag 
-"******************************************************************************
+"" "	ag 
 let g:ackprg = 'ag --nogroup --nocolor --column'
 
-"******************************************************************************
-"" "                               gundo 
-"******************************************************************************
+"" "	gundo 
 nnoremap <leader>h :GundoToggle<CR>
 
-"******************************************************************************
-"" "                           easy-align 
-"******************************************************************************
+"" "	easy-align 
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EashAlign)
 
-"******************************************************************************
-"" "                           lua 
-"******************************************************************************
+"" "	lua 
 let g:lua_compiler_name = '/usr/local/bin/luac'
 
 let b:lua_compiler_name = '/usr/local/bin/lualint'"
@@ -145,9 +207,7 @@ let g:lua_safe_omni_modules = 1
 let g:lua_define_completefunc = 0
 let g:lua_define_omnifunc = 0
 
-"******************************************************************************
-"" "                               Title 
-"******************************************************************************
+"" "	Title 
 autocmd BufNewFile *.cpp call SetTitle()
 autocmd BufNewFile *.h call SetTitle()
 autocmd BufNewFile *.sh call SetTitle()
@@ -231,94 +291,7 @@ func SetTitle()
 	endif
 endfunc
 
-"******************************************************************************
-"" "                               view 
-"******************************************************************************
-syntax on
-filetype off
-set nocompatible
-set cursorline
-set smarttab
-set showcmd 
-set history=400
-set mouse=a
-set number
-set ruler
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
-set smartindent
-set backspace=indent,eol,start
-set hlsearch
-
-" 控制台响铃
-set noerrorbells
-set novisualbell
-set t_vb= 
-
-" 状态栏显示目前所执行的指令
-set showcmd 
-
-if &term=="xterm"
-    set t_Co=8
-    set t_Sb=^[[4%dm
-    set t_Sf=^[[3%dm
-endif
-" au GUIEnter * simalt ~x 
-if has("gui_running")
-	set guioptions-=m 
-	set guioptions-=T
-	set guioptions-=L
-	set guioptions-=r
-	set guifont=Powerline_Consolas:h13
-endif
-
-set fenc=utf-8
-set encoding=utf-8
-set fileencodings=utf-8,gbk,cp936,latin-1
-source $VIMRUNTIME/delmenu.vim
-source $VIMRUNTIME/menu.vim
-language messages zh_CN.utf-8
-colorscheme molokai
-
-"******************************************************************************
-""                                 write 
-"******************************************************************************
-let g:AutoPairsMapCh = 0
-imap <c-K> <Up>
-imap <c-j> <Down>
-imap <c-h> <Left>
-imap <c-l> <Right>
-"au BufWinEnter * let w:m2=matchadd('Underlined', '\%>' . 80 . 'v.\+', -1)
-autocmd Vimleave * nested if (!isdirectory($HOME. "/.vim")) |
-	\ call mkdir($HOME . "/.vim") |
-	\ endif |
-	\ execute "mksession!" . $HOME . "/.vim/Session.vim"
-
-autocmd VimEnter * nested if argc() == 0 && filereadable($HOME . "/.vim/Session.vim") |
-\ execute "source " . $HOME . "/.vim/Session.vim"
-
-set nobackup
-set noswapfile
-set noundofile
-set noic
-set autoread
-
-" 返回当前时间
-func! GetTimeInfo()
-    "return strftime('%Y-%m-%d %A %H:%M:%S')
-    return strftime('%Y-%m-%d %H:%M:%S')
-endfunction
-
-" 插入模式按 Ctrl + D(ate) 插入当前时间
-imap <C-d> <C-r>=GetTimeInfo()<cr>
-
-autocmd BufWritePre *.go :GoImports
-autocmd BufWritePre *.go :GoFmt
-
-"******************************************************************************
 "               基础命令
-"******************************************************************************
 "   ctrl+q              可以联合复制，粘贴，替换用 行操作
 "   ctrl+w+j ctrl+w+k (:bn :bp :bd)
 
@@ -412,9 +385,7 @@ autocmd BufWritePre *.go :GoFmt
 "   set ai 设置自动缩进
 "   5ia<esc> 重复插入5个a字符
 
-"******************************************************************************
 "               替换命令
-"******************************************************************************
 "   替换文字 2009-02-34 ----> 2009-02-34 00:00:00
 "   :%s/\(\d\{4\}-\d\{2\}-\d\{2\}\)/\1 00:00:00/g
 
@@ -466,9 +437,7 @@ autocmd BufWritePre *.go :GoFmt
 "   :g/<pattern>/z#.5                           显示内容，还有行号
 "   :g/<pattern>/z#.5|echo '=========='         漂亮的显示
 
-"******************************************************************************
 "           多文档操作 (基础)
-"******************************************************************************
 "    用 :ls! 可以显示出当前所有的buffer
 "   :bn                 跳转到下一个buffer
 "   :bp                 跳转到上一个buffer
@@ -478,10 +447,6 @@ autocmd BufWritePre *.go :GoFmt
 "   :b 3                跳到第3个buffer
 "   :b main             跳到一个名字中包含main的buffer
 
-"******************************************************************************
-"           多文档操作 (基础)
-"           列复制
-"******************************************************************************
 "           多文档操作 (基础)
 "   译注：@#%&^#*^%#$!
 "   :%s= [^ ]\+$=&&= : 复制最后一列
