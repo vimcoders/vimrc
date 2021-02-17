@@ -5,7 +5,7 @@ let path='~/.vim/bundle'
 call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
-"Plugin 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'jiangmiao/auto-pairs'
 "Plugin 'Raimondi/delimitMate'
 "Plugin 'ctrlpvim/ctrlp.vim'
@@ -151,9 +151,9 @@ let g:go_term_enabled = 1
 let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go']}
 let g:go_list_type = "quickfix"
-let g:go_def_mode='gopls'
-let g:go_info_mode='gopls'
-au filetype go inoremap <buffer> . .<C-x><C-o>
+"let g:go_def_mode='gopls'
+"let g:go_info_mode='gopls'
+"au filetype go inoremap <buffer> . .<C-x><C-o>
 
 "" "	ctrl-p
 let g:ctrlp_map = '<c-p>'
