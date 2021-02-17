@@ -110,25 +110,6 @@ imap <C-d> <C-r>=GetTimeInfo()<cr>
 
 autocmd BufWritePre *.go :GoImports
 autocmd BufWritePre *.go :GoFmt
-autocmd BufWritePre *.c :ClangFormat
-autocmd BufWritePre *.cpp :ClangFormat
-autocmd BufWritePre *.cc :ClangFormat
-autocmd BufWritePre *.vue :Prettier
-autocmd BufWritePre *.js :Prettier
-
-"" "	ycm                                
-"let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
-let g:ycm_show_diagnostics_ui = 0                  "关闭语法提示
-let g:ycm_complete_in_comments=1                   " 补全功能在注释中同样有效
-let g:ycm_confirm_extra_conf=0                     " 允许 vim 加载 .ycm_extra_conf.py 文件，不再提示
-let g:ycm_collect_identifiers_from_tags_files=1    " 开启 YCM 标签补全引擎
-let g:ycm_min_num_of_chars_for_completion=1        " 从第一个键入字符就开始罗列匹配项
-let g:ycm_cache_omnifunc=0                         " 禁止缓存匹配项，每次都重新生成匹配项
-let g:ycm_seed_identifiers_with_syntax=1           " 语法关键字补全
-let g:ycm_goto_buffer_command = 'horizontal-split' " 跳转打开上下分屏
-let g:ycm_error_symbol = '>>'
-let g:ycm_warning_symbol = '>*'
-let mapleader = ","
 
 "" "	vim-go
 nmap gr :GoReferrers<CR>
