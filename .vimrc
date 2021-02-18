@@ -10,7 +10,7 @@ Plugin 'jiangmiao/auto-pairs'
 "Plugin 'Raimondi/delimitMate'
 "Plugin 'ctrlpvim/ctrlp.vim'
 "Plugin 'tacahiroy/ctrlp-funky'
-Plugin 'fatih/vim-go'
+"Plugin 'fatih/vim-go'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tomasr/molokai'
 Plugin 'scrooloose/nerdcommenter'
@@ -108,13 +108,13 @@ endfunction
 " 插入模式按 Ctrl + D(ate) 插入当前时间
 imap <C-d> <C-r>=GetTimeInfo()<cr>
 
-autocmd BufWritePre *.go :GoImports
-autocmd BufWritePre *.go :GoFmt
+"autocmd BufWritePre *.go :GoImports
+"autocmd BufWritePre *.go :GoFmt
 autocmd BufWritePre *.c :ClangFormat
 autocmd BufWritePre *.cpp :ClangFormat
 autocmd BufWritePre *.cc :ClangFormat
-autocmd BufWritePre *.vue :Prettier
-autocmd BufWritePre *.js :Prettier
+"autocmd BufWritePre *.vue :Prettier
+"autocmd BufWritePre *.js :Prettier
 
 "" "	ycm                                
 "let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
@@ -129,31 +129,6 @@ let g:ycm_goto_buffer_command = 'horizontal-split' " 跳转打开上下分屏
 let g:ycm_error_symbol = '>>'
 let g:ycm_warning_symbol = '>*'
 let mapleader = ","
-
-"" "	vim-go
-nmap gr :GoReferrers<CR>
-
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_types = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
-let g:go_fmt_command = "goimports"
-let g:go_fmt_fail_silently = 1
-let g:go_fmt_autosave = 0
-let g:go_play_open_browser = 0
-
-let g:go_bin_path = expand("~/go/bin")
-let g:go_get_update = 0
-let g:go_term_mode = "split"
-let g:go_term_enabled = 1
-let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go']}
-let g:go_list_type = "quickfix"
-"let g:go_def_mode='gopls'
-"let g:go_info_mode='gopls'
-"au filetype go inoremap <buffer> . .<C-x><C-o>
 
 "" "	ctrl-p
 let g:ctrlp_map = '<c-p>'
