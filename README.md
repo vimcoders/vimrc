@@ -1,7 +1,7 @@
 # vimer
 it's IDE.
 
-1. yum install python3.6-devel ncurses-libs ncurses-devel
+1. yum install python3.6-devel ncurses-libs ncurses-devel gcc gcc-c++ kernel-devel
 2. clone vim source code
 	git clone https://github.com/vim/vim.git
 3. compile
