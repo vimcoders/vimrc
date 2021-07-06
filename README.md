@@ -1,15 +1,14 @@
 # vimer
 it's IDE.
 
-1. clone vim source code
-
+1. yum install python3.6-devel ncurses-libs ncurses-devel
+2. clone vim source code
 	git clone https://github.com/vim/vim.git
-
-2. compile
+3. compile
 
 	cd ./vim
 
-	./configure --enable-pythoninterp --with-python-config-dir=/usr/lib64/python2.7/config
+	./configure --enable-python3interp --with-python3-config-dir=/usr/lib64/python3.6/config-3.6m-x86_64-linux-gnu/ --prefix=/usr/local/vim8
 
 	make
 
@@ -43,13 +42,13 @@ it's IDE.
 	
 	sudo make install
 
-3. git clone https://github.com/vimcoders/vimer.git
+4. git clone https://github.com/vimcoders/vimer.git
 
 	cp -rf .vim .vimrc ~/
 
 	git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/
 
-4. BundleInstall
+5. BundleInstall
 
     :BundleInstall
 
