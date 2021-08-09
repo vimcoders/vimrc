@@ -2,7 +2,9 @@
 it's IDE.
 
 1. yum install python3.6-devel ncurses-libs ncurses-devel gcc gcc-c++ kernel-devel
-2. clone vim source code
+2. rpm -i http://mirror.ghettoforge.org/distributions/gf/el/7/gf/x86_64/gcc10-libstdc++-10.2.1-7.gf.el7.x86_64.rpm
+3. find / -name "libstdc++.so.6*"
+4. clone vim source code
 	git clone https://github.com/vim/vim.git
 3. compile
 
