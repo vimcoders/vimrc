@@ -32,6 +32,7 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'buoto/gotests-vim'
 Plugin 'rhysd/vim-clang-format'
 Plugin 'prettier/vim-prettier'
+Plugin 'vim-erlang/vim-erlang-omnicomplete'
 
 call vundle#end()
 
@@ -55,6 +56,7 @@ set hlsearch
 set noerrorbells
 set novisualbell
 set t_vb= 
+syntax on
 
 " 状态栏显示目前所执行的指令
 set showcmd 
